@@ -11,6 +11,7 @@ use Phalcon\DiInterface;
 use Symfony\Component\Console\Application;
 use VideoRecruit\Phalcon\Doctrine\Migrations\InvalidArgumentException;
 use VideoRecruit\Phalcon\Doctrine\Migrations\InvalidStateException;
+use VideoRecruit\Phalcon\Doctrine\Migrations\OutputWriter;
 
 /**
  * Class MigrationsExtension
@@ -22,6 +23,7 @@ class MigrationsExtension
 	const PREFIX_COMMAND = 'videorecruit.doctrine.migrations.command.';
 
 	const CONFIGURATION = 'videorecruit.doctrine.migrations.configuration';
+	const OUTPUT_WRITER = 'videorecruit.doctrine.migrations.outputWriter';
 	const CONSOLE_COMMANDS = 'videorecruit.doctrine.migrations.commands';
 
 	/**
@@ -119,7 +121,13 @@ class MigrationsExtension
 	 */
 	private function loadConfiguration(array $config)
 	{
-		$this->di->setShared(self::CONFIGURATION, function ($connection, $outputWriter = NULL) use ($config) {
+		$this->di->setShared(self::OUTPUT_WRITER, function () {
+			return new OutputWriter;
+		});
+
+		$this->di->setShared(self::CONFIGURATION, function ($connection) use ($config) {
+			$outputWriter = $this->get(self::OUTPUT_WRITER);
+
 			$configuration = new Configuration($connection, $outputWriter);
 			$configuration->setMigrationsTableName($config['table']);
 			$configuration->setMigrationsColumnName($config['column']);
