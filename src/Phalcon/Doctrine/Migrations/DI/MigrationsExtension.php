@@ -31,7 +31,7 @@ class MigrationsExtension
 	 * @var array
 	 */
 	public $defaults = [
-		'table' => 'doctrine_migrations',
+		'table' => '_migration',
 		'column' => 'version',
 		'directory' => __DIR__ . '/../../../../../../../../migrations',
 		'namespace' => 'Migrations',
