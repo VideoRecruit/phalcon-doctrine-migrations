@@ -1,0 +1,15 @@
+{
+    "name": "videorecruit/phalcon-doctrine-migrations",
+    "type": "library",
+    "description": "Integration of Doctrine Migrations into Phalcon Framework with simple configuration.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Tomek",
+            "email": "tomeklukas@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/migrations": "~1.3"
+    }
+}
