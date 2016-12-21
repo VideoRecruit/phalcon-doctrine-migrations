@@ -3,6 +3,8 @@
 namespace VideoRecruit\Phalcon\Doctrine\Migrations\DI;
 
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand;
+use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
 use Nette\DI\Config\Helpers as ConfigHelpers;
 use Phalcon\Config;
 use Phalcon\DiInterface;
@@ -101,6 +103,7 @@ class MigrationsExtension
 			throw new InvalidStateException('There are no migration commands. Did you register the extension before?');
 		}
 
+		/** @var ConnectionHelper $connectionHelper */
 		$connectionHelper = $consoleApp->getHelperSet()->get('connection');
 		$connection = $connectionHelper->getConnection();
 
@@ -140,6 +143,7 @@ class MigrationsExtension
 			$this->di->setShared($serviceName, function ($connection) use ($name) {
 				$className = "Doctrine\\DBAL\\Migrations\\Tools\\Console\\Command\\{$name}Command";
 
+				/** @var AbstractCommand $command */
 				$command = new $className;
 
 				$configuration = $this->get(self::CONFIGURATION, [$connection]);
