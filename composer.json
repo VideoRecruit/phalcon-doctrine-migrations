@@ -13,5 +13,13 @@
         "doctrine/migrations": "~1.3",
         "nette/di": "~2.3",
         "symfony/console": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VideoRecruit\\": "src/"
+        },
+        "classmap": [
+            "src/Phalcon/Doctrine/Migrations/exceptions.php"
+        ]
     }
 }
