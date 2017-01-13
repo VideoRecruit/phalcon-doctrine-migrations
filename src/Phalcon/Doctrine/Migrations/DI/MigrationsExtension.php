@@ -5,7 +5,6 @@ namespace VideoRecruit\Phalcon\Doctrine\Migrations\DI;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
-use Nette\DI\Config\Helpers as ConfigHelpers;
 use Phalcon\Config;
 use Phalcon\DiInterface;
 use Symfony\Component\Console\Application;
@@ -175,6 +174,6 @@ class MigrationsExtension
 	 */
 	private function mergeConfigs(array $config, array $defaults)
 	{
-		return ConfigHelpers::merge($config, $defaults);
+		return Helpers::merge($config, $defaults);
 	}
 }
